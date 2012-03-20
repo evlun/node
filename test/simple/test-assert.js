@@ -246,10 +246,12 @@ var gotError = false;
 try {
   assert.deepEqual(b, c);
 } catch (e) {
+  // make sure the caught error was not caused by a stack overflow
+  assert.notEqual(e.message, 'Maximum call stack size exceeded');
+
   gotError = true;
 }
 
-console.log('All OK');
 assert.ok(gotError);
 
 
